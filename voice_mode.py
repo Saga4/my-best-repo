@@ -1002,12 +1002,14 @@ tts_config_cache: dict[str, TTSConfig] = {}
 def get_tts_config(session_id: str, openai_key: str) -> TTSConfig:
     """Get or create a TTSConfig instance for the given session_id."""
     if session_id is None:
-        msg = "session_id cannot be None"
-        raise ValueError(msg)
+        raise ValueError("session_id cannot be None")
 
-    if session_id not in tts_config_cache:
-        tts_config_cache[session_id] = TTSConfig(session_id, openai_key)
-    return tts_config_cache[session_id]
+    try:
+        return tts_config_cache[session_id]
+    except KeyError:
+        tts_config = TTSConfig(session_id, openai_key)
+        tts_config_cache[session_id] = tts_config
+        return tts_config
 
 
 @router.websocket("/ws/flow_tts/{flow_id}")
