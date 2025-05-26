@@ -3,5 +3,7 @@
 module-root = "."
 tests-root = "tests"
 test-framework = "pytest"
+benchmarks-root = ""
 ignore-paths = []
+disable-telemetry = true
 formatter-cmds = ["disabled"]
