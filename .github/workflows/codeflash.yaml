@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   optimize:
-    name: Optimize new Python code in this PR
+    name: Optimize new Python code
     # Don't run codeflash on codeflash-ai[bot] commits, prevent duplicate optimizations
     if: ${{ github.actor != 'codeflash-ai[bot]' }}
     runs-on: ubuntu-latest
@@ -24,17 +24,18 @@ jobs:
       CODEFLASH_PR_NUMBER: ${{ github.event.number }}
     
     steps:
-      - uses: actions/checkout@v4
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Set up Python
+      - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Install Project Dependencies
+          python-version: '3.12'
+      - name: 📦 Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install codeflash
-      - name: Run Codeflash to optimize code
+      - name: ⚡️Codeflash Optimization
         run: codeflash
