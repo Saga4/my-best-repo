@@ -38,7 +38,7 @@ class ComposioBaseComponent(Component):
             name="api_key",
             display_name="Composio API Key",
             required=True,
-            info="Refer to https://docs.composio.dev/faq/api_key/api_key",
+            info="Refer to https://d...content-available-to-author-only...o.dev/faq/api_key/api_key",
             real_time_refresh=True,
             value="COMPOSIO_API_KEY",
         ),
